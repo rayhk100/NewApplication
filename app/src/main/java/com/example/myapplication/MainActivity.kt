@@ -1,6 +1,7 @@
 package com.example.myapplication
 
 import android.os.Bundle
+import android.util.Log
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import androidx.navigation.ui.AppBarConfiguration
@@ -13,6 +14,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.view.Menu
 import androidx.navigation.findNavController
+import com.example.myapplication.kmb.eta.Response
+import retrofit2.Call
+import retrofit2.Callback
 
 class MainActivity : AppCompatActivity() {
 
@@ -42,7 +46,30 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+        KMBService.instance.getETA("1").enqueue(object:
+            Callback<Response> {
+            override fun onFailure(
+                call: Call<Response>,
+                t: Throwable
+            ) {
+                Log.e("MainActivity", t.message)
+            }
 
+            override fun onResponse(
+                call: Call<com.example.myapplication.kmb.eta.Response>,
+                response: retrofit2.Response<Response>
+            ) {
+                Log.d("MainActivity", response.toString())
+
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        for (eta in it.response) {
+                            Log.d("MainActivity", eta.t)
+                        }
+                    }
+                }
+            }
+        })
 //        findNavController()
     }
 
@@ -56,4 +83,5 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
+
 }
