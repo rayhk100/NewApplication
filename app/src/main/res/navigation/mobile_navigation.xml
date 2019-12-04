@@ -21,7 +21,13 @@
         android:id="@+id/nav_routes"
         android:name="com.example.myapplication.ui.routes.RoutesFragment"
         android:label="@string/menu_all_routes"
-        tools:layout="@layout/fragment_routes" />
+        tools:layout="@layout/fragment_routes" >
+        <action
+            android:id="@+id/action_nav_routes_to_nav_route_detail"
+            app:destination="@+id/nav_routes_detail"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_test"
@@ -61,4 +67,14 @@
         android:name="com.example.myapplication.ui.send.SendFragment"
         android:label="@string/menu_send"
         tools:layout="@layout/fragment_send" />
+
+    <fragment
+        android:id="@+id/nav_routes_detail"
+        android:name="com.example.myapplication.ui.routes.RouteDetailFragment"
+        android:label="@string/route_detail"
+        tools:layout="@layout/fragment_routes_detail">
+        <argument
+            android:name="route"
+            app:argType="string" />
+    </fragment>
 </navigation>

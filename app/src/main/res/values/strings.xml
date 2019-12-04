@@ -15,4 +15,6 @@
     <string name="menu_send">Send</string>
 
     <string name="menu_all_routes">All routes</string>
+
+    <string name="route_detail">Route Detail</string>
 </resources>

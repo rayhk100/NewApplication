@@ -15,6 +15,13 @@ import androidx.appcompat.widget.Toolbar
 import android.view.Menu
 import androidx.navigation.findNavController
 import com.example.myapplication.kmb.eta.Response
+import com.example.myapplication.model.AppDatabase
+import com.example.myapplication.model.Route
+import com.example.myapplication.ui.routes.RoutesViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 
@@ -22,11 +29,18 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
+
+        val db = AppDatabase.get(applicationContext)
+        MainScope().launch {
+            fetchRoutes()
+        }
+
 
         val fab: FloatingActionButton = findViewById(R.id.fab)
         fab.setOnClickListener { view ->
@@ -55,6 +69,7 @@ class MainActivity : AppCompatActivity() {
                 Log.e("MainActivity", t.message)
             }
 
+
             override fun onResponse(
                 call: Call<com.example.myapplication.kmb.eta.Response>,
                 response: retrofit2.Response<Response>
@@ -70,7 +85,11 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
+
 //        findNavController()
+    }
+    suspend fun fetchRoutes() = withContext(Dispatchers.IO) {
+        Route.fetchAll()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -84,4 +103,9 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
+    fun onClickRoute(vm: RoutesViewModel) {
+        vm.title.value?.let {
+            findNavController(R.id.nav_host_fragment).navigate(RouteFragmentDirections.actionNavRoutesToNavRouteDetail(it))
+        }
+    }
 }
