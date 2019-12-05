@@ -27,8 +27,10 @@ class RoutesListAdapter() : DataBoundListAdapter<Route>(
         is FragmentRoutesItemBinding -> {
             binding.vm = RoutesViewModel(item)
         }
-        else -> {}
+        else -> {
+        }
     }
+
     override fun onBindViewHolder(holder: DataBoundViewHolder, position: Int) {
         super.onBindViewHolder(holder, position)
         holder.setIsRecyclable(false)

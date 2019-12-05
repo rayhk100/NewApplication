@@ -40,8 +40,8 @@ class RoutesFragment : Fragment() {
         MainScope().launch {
             fetchRoutes()
         }
-
     }
+
     suspend fun fetchRoutes() = withContext(Dispatchers.IO) {
         var routes = Route.fetchAll()
 

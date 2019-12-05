@@ -17,6 +17,7 @@ import androidx.navigation.findNavController
 import com.example.myapplication.kmb.eta.Response
 import com.example.myapplication.model.AppDatabase
 import com.example.myapplication.model.Route
+import com.example.myapplication.ui.routes.RoutesFragmentDirections
 import com.example.myapplication.ui.routes.RoutesViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
@@ -103,9 +104,9 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-    fun onClickRoute(vm: RoutesViewModel) {
+    fun onClickRoute(vm:RoutesViewModel) {
         vm.title.value?.let {
-            findNavController(R.id.nav_host_fragment).navigate(RouteFragmentDirections.actionNavRoutesToNavRouteDetail(it))
+            findNavController(R.id.nav_host_fragment).navigate(RoutesFragmentDirections.actionNavRoutesToNavRouteDetail(it))
         }
     }
 }
