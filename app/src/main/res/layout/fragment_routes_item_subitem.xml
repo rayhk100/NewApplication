@@ -1,44 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-        <variable  name="vm"
-            type="com.example.myapplication.ui.routes.RouteDetailViewModel" />
+        <import type="com.example.myapplication.MainActivity" />
+        <variable name="item" type="com.example.myapplication.RouteInfo"/>
     </data>
-    <androidx.constraintlayout.widget.ConstraintLayout  android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.routes.RouteDetailFragment">
+    <androidx.constraintlayout.widget.ConstraintLayout  android:id="@+id/constraints"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{(view) -> ((MainActivity)view.getContext()).onClickRouteInfo(item)}">
 
-
-        <TextView  android:id="@+id/route_detail_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:text="@{vm.title}"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            app:layout_constraintEnd_toEndOf="parent"
+        <ToggleButton  android:id="@+id/toggleButton"
+            android:layout_width="32dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="16dp"
+            android:background="@color/colorPrimary"
+            android:text=""
+            android:textOff=" "
+            android:textOn=" "
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/source_destination"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/route_detail_recycler_view"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
-            app:items="@{vm.stops}"
-            app:itemBinding="@{vm.itemBinding}"
+
+        <LinearLayout  android:id="@+id/source_destination"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="16dp"
+            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/route_detail_title"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+            app:layout_constraintStart_toEndOf="@+id/toggleButton"
+            app:layout_constraintTop_toTopOf="parent">
 
+            <TextView  android:id="@+id/text_destination"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{item.destination}" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout></layout>
+            <TextView  android:id="@+id/text_source"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{item.source}" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

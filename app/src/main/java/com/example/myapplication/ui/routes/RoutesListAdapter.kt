@@ -30,9 +30,9 @@ class RoutesListAdapter() : DataBoundListAdapter<Route>(
         else -> {
         }
     }
-
-    override fun onBindViewHolder(holder: DataBoundViewHolder, position: Int) {
-        super.onBindViewHolder(holder, position)
-        holder.setIsRecyclable(false)
-    }
+//
+//    override fun onBindViewHolder(holder: DataBoundViewHolder, position: Int) {
+//        super.onBindViewHolder(holder, position)
+//        holder.setIsRecyclable(false)
+//    }
 }

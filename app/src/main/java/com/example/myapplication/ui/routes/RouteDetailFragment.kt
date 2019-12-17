@@ -15,14 +15,13 @@ import kotlinx.coroutines.withContext
 
 class RouteDetailFragment : Fragment() {
 
-    lateinit var binding:FragmentRouteDetailBinding
-
+    lateinit var binding: FragmentRoutesDetailBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentRouteDetailBinding.inflate(inflater, container, false).apply {
+        binding = FragmentRoutesDetailBinding.inflate(inflater, container, false).apply {
             lifecycleOwner = this@RouteDetailFragment
         }
 

@@ -1,8 +1,9 @@
 package com.example.myapplication.ui.routes
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
-import android.widget.SearchView
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.myapplication.R
@@ -23,6 +24,7 @@ class RoutesFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         setHasOptionsMenu(true)
         binding = FragmentRoutesBinding.inflate(inflater, container, false).apply {
             lifecycleOwner = this@RoutesFragment
@@ -47,14 +49,20 @@ class RoutesFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
 
+        Log.d("RoutesFragment","onCreateOptionsMenu menu size = ${menu.size()}")
+
+//        menu.findItem(R.id.search_view).actionView
         (menu.findItem(R.id.search_view).actionView as? SearchView)?.let {
+            Log.d("RoutesFragment","menu.findItem(R.id.search_view)")
             it.setOnQueryTextListener(object:SearchView.OnQueryTextListener{
                 override fun onQueryTextSubmit(query: String?): Boolean {
+                    Log.d("RoutesFragment","onQueryTextSubmit")
                     query?.let{filterByText(it)}
                     return true
                 }
 
                 override fun onQueryTextChange(newText: String?): Boolean {
+                    Log.d("RoutesFragment","onQueryTextChange")
                     newText?.let{filterByText(it)}
                     return true
                 }

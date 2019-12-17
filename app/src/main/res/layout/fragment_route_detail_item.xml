@@ -3,11 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="com.example.myapplication.MainActivity" />
         <variable  name="stop" type="com.example.myapplication.model.Stop" />
     </data>
-    <androidx.constraintlayout.widget.ConstraintLayout  android:layout_width="match_parent"
+    <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="@{(view) -> ((MainActivity)view.getContext()).onClickRouteInfo(item)}">>
+        >
 
         <TextView  android:id="@+id/route_detail_item_name"
             android:layout_width="0dp"
