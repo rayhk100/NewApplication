@@ -1,11 +1,11 @@
 package com.example.myapplication.ui.routes
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
+import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentRoutesBinding
 import com.example.myapplication.model.Route
 import kotlinx.coroutines.Dispatchers
@@ -23,6 +23,7 @@ class RoutesFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        setHasOptionsMenu(true)
         binding = FragmentRoutesBinding.inflate(inflater, container, false).apply {
             lifecycleOwner = this@RoutesFragment
         }
@@ -37,10 +38,36 @@ class RoutesFragment : Fragment() {
             addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
         }
 
-        MainScope().launch {
-            fetchRoutes()
+//        MainScope().launch {
+//            fetchRoutes()
+//        }
+        (binding.routesRecyclerView.adapter as RoutesListAdapter).submitList(Route.fetchAll())
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+
+        (menu.findItem(R.id.search_view).actionView as? SearchView)?.let {
+            it.setOnQueryTextListener(object:SearchView.OnQueryTextListener{
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    query?.let{filterByText(it)}
+                    return true
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    newText?.let{filterByText(it)}
+                    return true
+                }
+            })
         }
     }
+
+    fun filterByText(text:String) {
+        (binding.routesRecyclerView.adapter as RoutesListAdapter).submitList(Route.fetchAll().filter {
+            it.title.startsWith(text)
+        })
+    }
+
 
     suspend fun fetchRoutes() = withContext(Dispatchers.IO) {
         var routes = Route.fetchAll()

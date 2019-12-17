@@ -67,7 +67,10 @@ dependencies {
     kapt "android.arch.persistence.room:compiler:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
     annotationProcessor 'androidx.room:room-compiler:2.2.2'
-    implementation 'androidx.fragment:fragment:1.2.0-rc02'
+    implementation 'androidx.fragment:fragment:1.2.0-rc03'
+    implementation 'com.google.guava:guava:28.1-android'
+    implementation 'me.tatarka.bindingcollectionadapter2:bindingcollectionadapter:3.1.1'
+    implementation 'me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:3.1.1'
 
 }
 

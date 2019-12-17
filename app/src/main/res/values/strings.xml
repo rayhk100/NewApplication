@@ -17,4 +17,6 @@
     <string name="menu_all_routes">All routes</string>
 
     <string name="route_detail">Route Detail</string>
+
+    <string name="action_search">Search</string>
 </resources>

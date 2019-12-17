@@ -73,8 +73,7 @@
         android:name="com.example.myapplication.ui.routes.RouteDetailFragment"
         android:label="@string/route_detail"
         tools:layout="@layout/fragment_routes_detail">
-        <argument
-            android:name="route"
-            app:argType="string" />
+        <argument  android:name="routeInfo"
+            app:argType="com.example.myapplication.model.RouteInfo" />
     </fragment>
 </navigation>

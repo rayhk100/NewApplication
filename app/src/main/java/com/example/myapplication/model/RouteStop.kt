@@ -19,5 +19,6 @@ import androidx.room.*
 data class RouteStopId(
     val title:String,
     val bound:Int,
+    @ColumnInfo(name = "service_type") val serviceType:Int,
     val seq:Int
 )
