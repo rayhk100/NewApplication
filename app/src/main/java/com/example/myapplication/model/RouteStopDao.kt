@@ -18,4 +18,7 @@ interface RouteStopDao {
 
     @Query("SELECT stop.* FROM stop INNER JOIN route_stop on stop.id = route_stop.stop_id WHERE route_stop.title = :title AND route_stop.bound = :bound ORDER BY route_stop.seq")
     fun findStopsByTitleAndBound(title:String, bound:Int): Array<Stop>
+
+    @Query("SELECT stop.* FROM stop INNER JOIN route_stop on stop.id = route_stop.stop_id WHERE route_stop.title = :title AND route_stop.bound = :bound AND route_stop.service_type = :serviceType ORDER BY route_stop.seq")
+    fun findStopsByTitleBoundServiceType(title:String, bound:Int, serviceType:Int): List<Stop>
 }

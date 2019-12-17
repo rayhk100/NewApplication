@@ -104,9 +104,9 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-    fun onClickRoute(vm:RoutesViewModel) {
-        vm.title.value?.let {
-            findNavController(R.id.nav_host_fragment).navigate(RoutesFragmentDirections.actionNavRoutesToNavRouteDetail(it))
-        }
+    fun onClickRouteInfo(vm: RouteInfo) {
+        findNavController(R.id.nav_host_fragment).navigate(RoutesFragmentDirections.actionNavRoutesToNavRouteDetail(vm))
     }
+
+
 }

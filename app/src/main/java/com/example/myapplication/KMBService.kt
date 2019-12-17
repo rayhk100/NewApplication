@@ -26,4 +26,7 @@ interface KMBService {
 
     @GET("http://etav3.kmb.hk/?action=geteta")
     fun getETA(@Query("route") route:String, @Query("bound") bound:Int = 1, @Query("stop_seq") seq:Int = 0): Call<com.example.myapplication.kmb.eta.Response>
+
+    @GET("/KMBWebSite/Function/FunctionRequest.ashx?action=getstops")
+    fun getStops(@Query("route") route:String, @Query("bound") bound:Int = 1, @Query("serviceType") serviceType:Int = 1): Call<com.example.myapplication.kmb.stop.Response>
 }
